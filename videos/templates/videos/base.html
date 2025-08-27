@@ -3,223 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIKtube</title>
-    
+    <title>VibeVideos</title>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-    
+
     {% load static %}
-    <!-- Custom Professional Styles -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
     <style>
         :root {
-            --primary-dark: #1e293b;
-            --primary-blue: #334155;
-            --accent-blue: #3b82f6;
-            --secondary-gray: #64748b;
-            --light-gray: #f8fafc;
-            --border-gray: #e2e8f0;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --success-green: #059669;
-            --warning-orange: #d97706;
-            --danger-red: #dc2626;
+            --bg-dark: #0b0f13;
+            --bg-darker: #070a0d;
+            --white: #ffffff;
+            --blue: #3b82f6;
+            --blue-dark: #2563eb;
+            --green: #10b981;
+            --green-dark: #059669;
+            --amber: #f59e0b;
+            --amber-dark: #d97706;
+            --border-dark: #1f2937;
+            --placeholder: #9ca3af;
         }
-        
+
         body {
-            background-color: var(--light-gray);
-            color: var(--text-primary);
+            background: var(--bg-dark);
+            color: var(--white);
         }
-        
+
+        a { color: var(--blue); }
+        a:hover { color: var(--blue-dark); }
+
+        /* Navbar Layout */
+        .nav-shell {
+            background: var(--bg-darker) !important;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+        }
+        @media (max-width: 992px) {
+            .nav-grid { grid-template-columns: 1fr; }
+            .brand-zone { order: -1; }
+        }
+
+        /* Brand */
         .navbar-brand {
-            font-weight: bold;
+            font-weight: 800;
             font-size: 28px;
-            letter-spacing: 1px;
+            color: var(--white);
         }
-        .brand-tik {
-            color: var(--primary-dark);
+        .brand-vibe { color: var(--white); }
+        .brand-videos { color: var(--blue); }
+
+        /* Search + Forms */
+        .form-control,
+        textarea.form-control,
+        select.form-control {
+            background-color: #111827;
+            border: 2px solid var(--amber);
+            color: var(--white);
         }
-        .brand-tube {
-            color: var(--accent-blue);
+        .form-control::placeholder,
+        textarea.form-control::placeholder {
+            color: var(--placeholder);
+            opacity: 1;
         }
-        
-        .navbar {
-            background-color: white !important;
-            border-bottom: 1px solid var(--border-gray);
+        .form-control:focus,
+        textarea.form-control:focus,
+        select.form-control:focus {
+            background-color: #111827;
+            color: var(--white);
+            border-color: var(--amber-dark);
+            box-shadow: 0 0 0 0.2rem rgba(245,158,11,0.35);
         }
-        
-        .btn-primary {
-            background-color: var(--accent-blue);
-            border-color: var(--accent-blue);
+        .search-wrap { max-width: 520px; }
+
+        /* Buttons */
+        .btn-blue {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: var(--white);
         }
-        .btn-primary:hover {
-            background-color: var(--primary-blue);
-            border-color: var(--primary-blue);
+        .btn-blue:hover {
+            background: var(--blue-dark);
+            border-color: var(--blue-dark);
         }
-        
-        .btn-success {
-            background-color: var(--success-green);
-            border-color: var(--success-green);
+        .btn-green {
+            background: var(--green);
+            border-color: var(--green);
+            color: var(--white);
         }
-        .btn-success:hover {
-            background-color: #047857;
-            border-color: #047857;
+        .btn-green:hover {
+            background: var(--green-dark);
+            border-color: var(--green-dark);
         }
-        
-        .btn-danger {
-            background-color: var(--danger-red);
-            border-color: var(--danger-red);
+
+        /* Dropdown */
+        .dropdown-menu {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-dark);
         }
-        
-        .btn-outline-success {
-            color: var(--success-green);
-            border-color: var(--success-green);
-        }
-        .btn-outline-success:hover {
-            background-color: var(--success-green);
-            border-color: var(--success-green);
-        }
-        
-        .btn-outline-danger {
-            color: var(--danger-red);
-            border-color: var(--danger-red);
-        }
-        .btn-outline-danger:hover {
-            background-color: var(--danger-red);
-            border-color: var(--danger-red);
-        }
-        
+        .dropdown-item { color: var(--white); }
+        .dropdown-item:hover { background: #111827; color: var(--blue); }
+
+        /* Cards */
         .card {
-            border: 1px solid var(--border-gray);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            background: #0f141a;
+            border: 1px solid var(--border-dark);
+            color: var(--white);
         }
-        
         .card-header {
-            background-color: white;
-            border-bottom: 1px solid var(--border-gray);
-            color: var(--text-primary);
+            background: #0f141a;
+            border-bottom: 1px solid var(--border-dark);
+            color: var(--blue);
         }
-        
-        .profile-pic {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+
+        /* Avatars */
+        .profile-pic, .default-avatar {
+            width: 32px; height: 32px; border-radius: 50%;
             object-fit: cover;
         }
         .default-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: var(--secondary-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-        }
-        
-        .text-muted {
-            color: var(--text-secondary) !important;
-        }
-        
-        .bg-primary {
-            background-color: var(--accent-blue) !important;
-        }
-        
-        .bg-success {
-            background-color: var(--success-green) !important;
-        }
-        
-        .bg-danger {
-            background-color: var(--danger-red) !important;
-        }
-        
-        .bg-secondary {
-            background-color: var(--secondary-gray) !important;
-        }
-        
-        .progress-bar {
-            background-color: var(--success-green);
-        }
-        
-        .dropdown-menu {
-            border: 1px solid var(--border-gray);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-control:focus {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
-        }
-        
-        a {
-            color: var(--accent-blue);
-        }
-        a:hover {
-            color: var(--primary-blue);
-        }
-        
-        .alert-info {
-            background-color: #dbeafe;
-            border-color: #93c5fd;
-            color: var(--primary-blue);
+            background: var(--green-dark);
+            color: var(--white);
+            display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar nav-shell py-3 shadow-sm">
         <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand text-decoration-none" href="{% url 'videos' %}">
-                <span class="brand-tik">TIK</span><span class="brand-tube">tube</span>
-            </a>
+            <div class="nav-grid w-100">
 
-            <!-- Toggle button for mobile -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar content -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Search form -->
-                <div class="mx-auto">
-                    <form class="d-flex" method="GET" action="">
-                        <div class="input-group" style="width: 400px;">
-                            <input class="form-control" type="text" name="query" placeholder="Search videos..." value="{{ request.GET.query }}">
-                            <button class="btn btn-primary" type="submit">
+                <!-- Left: Search -->
+                <div class="left-zone d-flex justify-content-start">
+                    <form class="search-wrap w-100" method="GET" action="">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="query" placeholder="Search videos…" value="{{ request.GET.query }}">
+                            <button class="btn btn-blue" type="submit" aria-label="Search">
                                 <i class="bi bi-search"></i>
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Right side navigation -->
-                <ul class="navbar-nav ms-auto">
-                    {% if not user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">
-                                <i class="bi bi-box-arrow-in-right"></i> Login
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary ms-2" href="{% url 'signup' %}">
-                                <i class="bi bi-person-plus"></i> Sign Up
-                            </a>
-                        </li>
-                    {% else %}
-                        <!-- Upload button -->
-                        <li class="nav-item">
-                            <a class="btn btn-success me-3" href="{% url 'upload' %}">
-                                <i class="bi bi-cloud-upload"></i> Upload
-                            </a>
-                        </li>
+                <!-- Center: Brand -->
+                <div class="brand-zone d-flex justify-content-center">
+                    <a class="navbar-brand text-decoration-none" href="{% url 'videos' %}">
+                        <span class="brand-vibe">Vibe</span><span class="brand-videos">Videos</span>
+                    </a>
+                </div>
 
-                        <!-- User dropdown -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                <!-- Right: Actions -->
+                <div class="right-zone d-flex justify-content-end align-items-center">
+                    {% if not user.is_authenticated %}
+                        <a class="nav-link me-2 text-white" href="{% url 'login' %}">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                        </a>
+                        <a class="btn btn-blue" href="{% url 'signup' %}">
+                            <i class="bi bi-person-plus me-1"></i> Sign Up
+                        </a>
+                    {% else %}
+                        <a class="btn btn-green me-3" href="{% url 'upload' %}">
+                            <i class="bi bi-cloud-upload me-1"></i> Upload
+                        </a>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                                 {% if user.profile.picture %}
                                     <img src="{{ user.profile.picture.url }}" alt="Profile" class="profile-pic me-2">
                                 {% else %}
@@ -230,38 +188,36 @@
                                 {{ user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'profile' %}">
-                                        <i class="bi bi-person"></i> View Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'profile_edit' %}">
-                                        <i class="bi bi-pencil"></i> Edit Profile
-                                    </a>
-                                </li>
+                                <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person me-2"></i> View Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'profile_edit' %}"><i class="bi bi-pencil me-2"></i> Edit Profile</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'logout' %}">
-                                        <i class="bi bi-box-arrow-right"></i> Logout
-                                    </a>
-                                </li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
                             </ul>
-                        </li>
+                        </div>
                     {% endif %}
-                </ul>
+                </div>
+
             </div>
         </div>
     </nav>
 
-    <!-- Main content -->
-    <main class="container mt-4">
+    <!-- MAIN -->
+    <main class="container py-4">
         {% block content %}
+
+        <!-- Example forms to test style -->
+        <div class="card p-4 mt-3">
+            <h4 class="mb-3">Join VibeVideos</h4>
+            <input type="text" class="form-control mb-3" placeholder="Your username">
+            <input type="email" class="form-control mb-3" placeholder="Your email">
+            <textarea class="form-control mb-3" rows="3" placeholder="Upload a profile picture to personalize your account"></textarea>
+            <button class="btn btn-blue">Sign Up</button>
+        </div>
+
         {% endblock %}
     </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
