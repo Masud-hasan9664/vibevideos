@@ -5,7 +5,7 @@
     <div class="col-md-8">
         <div class="card shadow form-professional">
             <div class="card-header">
-                <h3 class="mb-0 text-professional-primary"><i class="bi bi-pencil-square"></i> Edit Profile</h3>
+                <h3 class="mb-0 text-warning"><i class="bi bi-pencil-square text-warning"></i> Edit Profile</h3>
             </div>
             <div class="card-body">
                 {% if success %}
@@ -55,11 +55,11 @@
                         {% endif %}
                     </div>
                     
-                    <div class="mb-3">
+                    <div class="mb-3 ">
                         <label for="id_picture" class="form-label">Profile Picture</label>
                         {% if form.instance.picture %}
-                            <div class="mb-2">
-                                <p class="text-muted">Current Picture:</p>
+                            <div class="mb-2 text-warning">
+                                <p class="text-warning">Current Picture:</p>
                                 <img src="{{ form.instance.picture.url }}" alt="Current Profile Picture" 
                                      class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
                             </div>
